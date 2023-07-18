@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
                 width: Get.width,
-                height: Get.height - Get.statusBarHeight / 2,
+                height: Get.height.h,
                 child: Column(
                   children: [
                     Image.asset(
@@ -56,22 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   authController.login(numbercontroller.text, passC.text);
                                   // Get.to(HomeScreen());
                                 }),)
-                                // Row(
-                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                //   children: [
-                                //     // InkWell(
-                                //     //   child: Text(
-                                //     //     'نسيت كلمة المرور ؟',
-                                //     //     style: semibold,
-                                //     //   ),
-                                //     // ),
-                                //     button1('تسجيل الدخول', () {
-                                //       authController.login(numbercontroller.text, passC.text);
-                                //       // Get.to(HomeScreen());
-                                //     }),
-                                //   ],
-                                // ),
                               )
                             ],
                           ),

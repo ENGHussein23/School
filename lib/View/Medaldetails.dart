@@ -28,6 +28,7 @@ class _MedalDetailsState extends State<MedalDetails> {
     competetion.data.name="جار التحميل";
     competetion.data.description="جار التحميل";
     competetion.data.how_to_win="جار التحميل";
+    competetion.data.colored_icon="";
     super.initState();
     setState(() {
       getInfoMedal( widget.medal!.id!);
@@ -134,7 +135,8 @@ class _MedalDetailsState extends State<MedalDetails> {
                               bottom: 70.h,
                               left: 20.w,
                               child: Image.network(
-                                widget.medal!.image.toString(),
+                                // widget.medal!.image.toString(),
+                                competetion.data.colored_icon,
                                 width: 130.w,
                                 height: 130.w,
                               ),
@@ -153,15 +155,11 @@ class _MedalDetailsState extends State<MedalDetails> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
+                        SizedBox(height: 20.h,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: 40.w,
-                            ),
+                            SizedBox(width: 40.w,),
                             Container(
                               width: 30.w,
                               height: 30.w,
@@ -169,19 +167,15 @@ class _MedalDetailsState extends State<MedalDetails> {
                                   color: primcolor.withOpacity(0.2),
                                   shape: BoxShape.circle),
                             ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
+                            SizedBox(width: 10.w,),
                             Text(
                               // widget.medal!.name.toString(),
-                              competetion.data.name,
+                              "اسم الوسام : ${competetion.data.name}",
                               style: semibold.copyWith(color: primcolor,fontSize: 12.sp),
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
+                        SizedBox(height: 10.h,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -201,7 +195,7 @@ class _MedalDetailsState extends State<MedalDetails> {
                             Container(
                               width: Get.width-100.w,
                               child: Text(
-                                competetion.data.description,
+                                "الوصف : ${competetion.data.description}",
                                 style: semibold.copyWith(color: primcolor,fontSize: 12.sp),
                               ),
                             )
@@ -228,7 +222,7 @@ class _MedalDetailsState extends State<MedalDetails> {
                             Container(
                               width: Get.width-100.w,
                               child: Text(
-                                competetion.data.how_to_win,
+                                "خطوات الحصول عليه : ${competetion.data.how_to_win}",
                                 style: semibold.copyWith(color: primcolor,fontSize: 12.sp),
                               ),
                             )

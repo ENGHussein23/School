@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salateapp/Models/login_model.dart';
 
-Login login_data_global=Login();
+// Login login_data_global=Login();
 
 TextStyle semibold = TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp);
 

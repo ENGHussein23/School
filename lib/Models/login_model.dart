@@ -12,10 +12,16 @@ class Login{
     token_type=json['token_type'];
     expires_in=json['expires_in'];
   }
+  Map<String, dynamic> toJson() => {
+    'access_token': access_token,
+    'student': student.toJson(),
+    'token_type': token_type,
+    'expires_in': expires_in,
+  };
 }
 
 class Student{
-  late int id;
+  late String id;
   late String name;
   late String birth_date;
   late String school_name;
@@ -44,4 +50,19 @@ Student();
     image=json['image']==null? json['gender']=="female"?No_Image_Female:No_Imahe_Male :API_Images_Url+json['image'];
     gender=json['gender']=="female"?"البطلة":"البطل";
   }
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'birth_date': birth_date,
+    'school_name': school_name,
+    'school_stage': school_stage,
+    'phone': phone,
+    'parents_name': parents_name,
+    'study_year': study_year,
+    'email': email,
+    'blood_group': blood_group,
+    'financial_id': financial_id,
+    'image': image,
+    'gender': gender,
+  };
 }

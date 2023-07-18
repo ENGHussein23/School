@@ -9,6 +9,7 @@ import 'package:salateapp/Controller/auth_controller.dart';
 import 'package:salateapp/Models/login_model.dart';
 import 'package:salateapp/Widgets/Buttons.dart';
 import 'package:salateapp/globals.dart';
+import 'package:salateapp/main.dart';
 class PersonalinfoController extends GetxController {
   var loginController = Get.find<AuthController>();
   @override
@@ -89,6 +90,7 @@ var is_uploading=false.obs;
           if (jsonRes != null && jsonRes['data'] != null && jsonRes['data']['image'] != null) {
             loginController.login_data.student.image = API_Images_Url+jsonRes['data']['image'];
             loginController.image_link.value=loginController.login_data.student.image;
+            await sharedpref.setString('image', loginController.login_data.student.image);
             print('Image updated successfully');
           } else {
             is_uploading.value=false;

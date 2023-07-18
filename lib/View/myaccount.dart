@@ -92,7 +92,7 @@ class _MyaccountState extends State<Myaccount> {
                                     builder: (_PersonalinfoController) {
                                   return Container(
                                     width: Get.width,
-                                    height: 100.h,
+                                    // height: 100.h,
                                     color: Colors.white,
                                     child: Row(children: [
                                       Container(
@@ -101,11 +101,9 @@ class _MyaccountState extends State<Myaccount> {
                                           border: Border.all(width: 1, color: primcolor),
                                         ),
                                         child:
-
                                         Stack(
                                           children: [
                                         Obx(() {
-
                                           if(_PersonalinfoController.is_uploading.value==true) {
                                             return Container(
                                               width: 100.sp,
@@ -145,7 +143,7 @@ class _MyaccountState extends State<Myaccount> {
                                             );
                                           }
                                         }),
-                                            Positioned(
+                                        Positioned(
                                                 bottom: 0,
                                                 left: 0,
                                                 child: GestureDetector(
@@ -169,13 +167,11 @@ class _MyaccountState extends State<Myaccount> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 10),
+                                        padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          textDirection: TextDirection.rtl,
                                           children: [
                                             Text(
                                               authController.login_data.student.gender,
@@ -184,12 +180,16 @@ class _MyaccountState extends State<Myaccount> {
                                                   height: 1,
                                               fontSize: 13.sp),
                                             ),
-                                            Text(
-                                              authController.login_data.student.name,
-                                              style: semibold.copyWith(
-                                                  fontSize: 16.sp,
-                                                  color: primcolor,
-                                                  height: 2),
+                                            Container(
+                                              width: Get.width-125.w,
+                                              child: Text(
+                                                authController.login_data.student.name,
+                                                style: semibold.copyWith(
+                                                    fontSize: 16.sp,
+                                                    color: primcolor,
+                                                    height: 2),
+                                                softWrap: true,
+                                              ),
                                             ),
                                             Text(
                                               // 'الأول المتوسط',
@@ -247,17 +247,24 @@ class _MyaccountState extends State<Myaccount> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
        Row(
+         textDirection: TextDirection.rtl,
+         crossAxisAlignment: CrossAxisAlignment.start,
          children: [
            // Icon(Icons.family_restroom_outlined),
            Text(
              main_title,
-             style: semibold.copyWith(fontSize: 15.sp, color: Colors.grey[600]),
+             textDirection: TextDirection.rtl,
+
+             style: semibold.copyWith(fontSize: 14.sp, color: Colors.grey[600]),
            ),
            SizedBox(width: 5.w,),
-           Text(
-             title,
-             style: semibold.copyWith(fontSize: 15.sp, color: Colors.grey[400]),
-           ),
+          Expanded(child: Container(
+            child: Text(
+              title,
+              style: semibold.copyWith(fontSize: 14.sp, color: Colors.grey[400]),
+              softWrap: true,
+            ),
+          )),
 
          ],
        ),

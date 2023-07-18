@@ -4,6 +4,7 @@ import 'package:salateapp/Controller/auth_controller.dart';
 import 'package:salateapp/View/LoginScreen.dart';
 import 'package:salateapp/View/Medaldetails.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salateapp/main.dart';
 import '../Controller/Mymedals.dart';
 import '../Controller/Personinfoc.dart';
 import '../globals.dart';
@@ -25,8 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
           body:
           Container(
-            height: Get.height.h,
-            width: Get.width.w,
+            height: Get.height,
+            width: Get.width,
             child: Stack(
                     children: [
                       Container(
@@ -72,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 }),
                             GetBuilder<PersonalinfoController>(
                                 builder: (_PersonalinfoController) {
-                                  print("login_data_global name is ${login_data_global.student.name}");
                                   return Container(
                                     width: Get.width,
 
@@ -86,12 +86,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                               padding: const EdgeInsets.symmetric(
                                                   vertical: 20, horizontal: 10),
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 mainAxisAlignment: MainAxisAlignment.end,
+                                                textDirection: TextDirection.rtl,
                                                 children: [
                                                   Text(
                                                     authController.login_data.student.gender,
                                                     style: semibold.copyWith(
+
+                                                        fontSize: 12.sp,
                                                         color: Colors.grey, height: 1),
                                                   ),
                                                   Text(
@@ -104,8 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   Text(
                                                     // 'الأول المتوسط',
-                                                      login_data_global.student.study_year,
+                                                    authController.login_data.student.study_year,
                                                     style: semibold.copyWith(
+                                                        fontSize: 12.sp,
                                                         color: Colors.grey, height: 1),
                                                   ),
                                                 ],
@@ -142,40 +146,65 @@ class _HomeScreenState extends State<HomeScreen> {
                             Obx(() =>  Column(
                               children: [
                                 Image.asset(
-                                  'assets/homeappbare.png',
+                                  'assets/headers_arrow_2.png',
                                   fit: BoxFit.cover,
                                   width: Get.width,
                                 ),
                                 medalsController.medalloded.value==true?
-                                Padding(
+                                Container(
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(color: Colors.white,width: 1)
+                                  // ),
                                   padding:  EdgeInsets.only(top: 10.0.h,bottom: 10.0.h,left: 10.0.w,right: 10.0.w),
-                                  child: GridView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 5,
-                                      crossAxisSpacing: 10.0.w,
-                                      mainAxisSpacing: 20.0.w,
-                                    ),
-                                    itemCount: medalsController.medals_length.value,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
+                                  child:Wrap(
+                                    spacing: 10,
+                                    runSpacing: 20,
+                                    children: List.generate(
+                                      medalsController.medals_length.value,
+                                          (index) => SizedBox(
+                                        width: 80,
+                                        child: InkWell(
                                           onTap: () {
-                                            if (medalsController
-                                                .medals[index].selected !=
-                                                '1') {
-                                              Get.to(MedalDetails(
-                                                  medalsController.medals[index]));
+                                            if (medalsController.medals[index].selected != '1') {
+                                              Get.to(MedalDetails(medalsController.medals[index]));
                                             } else {
-                                              Get.to(MedalDetails2(
-                                                  medalsController.medals[index]));
+                                              Get.to(MedalDetails2(medalsController.medals[index]));
                                             }
                                           },
-                                          child: Image.network( medalsController.medals[index].image.toString())
-                                      );
-                                    },
-                                  ),
+                                          child: Image.network(medalsController.medals[index].image.toString()),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+
+                                  // GridView.builder(
+                                  //   physics: NeverScrollableScrollPhysics(),
+                                  //   shrinkWrap: true,
+                                  //   gridDelegate:
+                                  //   SliverGridDelegateWithMaxCrossAxisExtent(
+                                  //     maxCrossAxisExtent: 80,
+                                  //     mainAxisSpacing: 20,
+                                  //     crossAxisSpacing: 10,
+                                  //     childAspectRatio: 1,
+                                  //   ),
+                                  //   itemCount: medalsController.medals_length.value,
+                                  //   itemBuilder: (context, index) {
+                                  //     return InkWell(
+                                  //         onTap: () {
+                                  //           if (medalsController
+                                  //               .medals[index].selected !=
+                                  //               '1') {
+                                  //             Get.to(MedalDetails(
+                                  //                 medalsController.medals[index]));
+                                  //           } else {
+                                  //             Get.to(MedalDetails2(
+                                  //                 medalsController.medals[index]));
+                                  //           }
+                                  //         },
+                                  //         child: Image.network( medalsController.medals[index].image.toString())
+                                  //     );
+                                  //   },
+                                  // ),
                                 )
                                     :CircularProgressIndicator(),
                               ],
@@ -193,7 +222,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
-          onTap: () {
+          onTap: () async {
+            await sharedpref.remove('token');
+            await sharedpref.remove('user');
+            await sharedpref.remove('image');
             Get.offAll(LoginScreen());
           },
           child: Container(
